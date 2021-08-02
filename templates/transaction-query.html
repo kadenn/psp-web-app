@@ -1,0 +1,252 @@
+{% extends "layout.html" %} {% block content %}
+<div class="column is-4 is-offset-4">
+  <h3 class="title">Transaction ​Query</h3>
+  <div class="box">
+    <form method="POST" action="/transaction-query">
+      <div class="field">
+        <div class="control">
+          <label for="start-date">Start Date</label>
+          <input
+            class="input is-medium"
+            type="date"
+            id="start-date"
+            name="start-date"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="end-date">End Date</label>
+          <input
+            class="input is-medium"
+            type="date"
+            id="end-date"
+            name="end-date"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="status">Status</label>
+          <select
+            class="select is-medium is-fullwidth"
+            name="status"
+            id="status"
+          >
+            <option value="">ALL</option>
+            <option value="APPROVED">APPROVED</option>
+            <option value="WAITING">WAITING</option>
+            <option value="DECLINED">DECLINED</option>
+            <option value="ERROR">ERROR</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="operation​​">Operation​​</label>
+          <select
+            class="select is-medium is-fullwidth"
+            name="operation​​"
+            id="operation​​"
+          >
+            <option value="">ALL</option>
+            <option value="DIRECT">DIRECT</option>
+            <option value="REFUND">REFUND</option>
+            <option value="3D">3D</option>
+            <option value="3DAUTH">3DAUTH</option>
+            <option value="STORED">STORED</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="merchant-id">Merchant Id</label>
+          s
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="acquirer-id">Acquirer Id</label>
+          <input
+            class="input is-medium"
+            type="number"
+            id="acquirer-id"
+            name="acquirer-id"
+            placeholder="Acquirer Id"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="payment-method​">Payment Method​</label>
+          <select
+            class="select is-medium is-fullwidth"
+            name="payment-method"
+            id="payment-method"
+          >
+            <option value="">ALL</option>
+            <option value="CREDITCARD">CREDITCARD</option>
+            <option value="CUP">CUP</option>
+            <option value="IDEAL">IDEAL</option>
+            <option value="GIROPAY">GIROPAY</option>
+            <option value="MISTERCASH">MISTERCASH</option>
+            <option value="STORED">STORED</option>
+            <option value="PAYTOCARD">PAYTOCARD</option>
+            <option value="CEPBANK">CEPBANK</option>
+            <option value="CITADEL">CITADEL</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="error-code​​">Error Code​​</label>
+          <select
+            class="select is-medium is-fullwidth"
+            name="error-code"
+            id="error-code"
+          >
+            <option value="">ALL</option>
+            <option value="Do not honor">Do​ ​not​ ​honor</option>
+            <option value="Invalid Transaction">Invalid​ ​Transaction</option>
+            <option value="Invalid Card">Invalid​ ​Card</option>
+            <option value="Not sufficient funds">
+              Not​ ​sufficient​ ​funds
+            </option>
+            <option value="Incorrect PIN">Incorrect​ ​PIN</option>
+            <option value="Invalid ​country association">
+              Invalid​ ​country​ ​association
+            </option>
+            <option value="3-D Secure Transport Error">
+              3-D​ ​Secure​ ​Transport​ ​Error
+            </option>
+            <option value="Transaction not permitted to cardholder">
+              Transaction​ ​not permitted​ ​to​ ​cardholder
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="filter-field​​​​">Filter Key</label>
+          <div>
+            <select
+              class="select is-medium is-fullwidth"
+              name="filter-field​​"
+              id="filter-field​​"
+            >
+              <option value="">None</option>
+              <option value="Transaction UUID">Transaction​ ​UUID</option>
+              <option value="Customer Email">Customer​ ​Email</option>
+              <option value="Reference No">Reference​ ​No</option>
+              <option value="Custom Data">Custom​ ​Data</option>
+              <option value="Card PAN">Card​ ​PAN</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="filter-value">Filter Value</label>
+          <input
+            class="input is-medium"
+            type="text"
+            id="filter-value"
+            name="filter-value"
+            placeholder="Filter Value"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="button is-block is-info is-medium is-fullwidth"
+      >
+        Search
+      </button>
+    </form>
+    <br />
+    <a href="/"
+      ><button class="button is-block is-danger is-medium is-fullwidth">
+        Back
+      </button></a
+    >
+  </div>
+</div>
+{% if data %}
+<br />
+<div class="table-container">
+  <h3 class="title">Result Table</h3>
+
+  <table
+    class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+  >
+    <thead>
+      <tr>
+        <th>Created At</th>
+        <th>Original Amount</th>
+        <th>Original Currency</th>
+        <th>Allow Partial Refund</th>
+        <th>Merchant Id</th>
+        <th>Merchant Name</th>
+        <th>Refundable</th>
+        <th>Merchant Custom Data</th>
+        <th>Merchant Message</th>
+        <th>Merchant Operation</th>
+        <th>Merchant Status</th>
+        <th>Merchant Transaction Id</th>
+        <th>Merchant Type</th>
+        <th>Updated At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in data %}
+      <tr>
+        <td>{{ transaction.created_at }}</td>
+        <td>{{ transaction.fx.merchant.originalAmount }}</td>
+        <td>{{ transaction.fx.merchant.originalCurrency }}</td>
+        <td>{{ transaction.merchant.allowPartialRefund }}</td>
+        <td>{{ transaction.merchant.id }}</td>
+        <td>{{ transaction.merchant.name }}</td>
+        <td>{{ transaction.refundable }}</td>
+        <td>{{ transaction.transaction.merchant.customData }}</td>
+        <td>{{ transaction.transaction.merchant.message }}</td>
+        <td>{{ transaction.transaction.merchant.operation }}</td>
+        <td>{{ transaction.transaction.merchant.status }}</td>
+        <td>{{ transaction.transaction.merchant.transactionId }}</td>
+        <td>{{ transaction.transaction.merchant.type }}</td>
+        <td>{{ transaction.updated_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %} {% if next_page %}
+<br />
+<form method="POST" action="/transaction-query">
+  <input type="hidden" name="page" id="page" value="next_page" />
+  <button type="submit" class="button is-block is-info is-medium is-fullwidth">
+    Next Page
+  </button>
+</form>
+{% endif %} {% if prev_page %}
+<br />
+<form method="POST" action="/transaction-query">
+  <input type="hidden" name="page" id="page" value="prev_page" />
+  <button type="submit" class="button is-block is-info is-medium is-fullwidth">
+    Previous Page
+  </button>
+</form>
+{% endif %} {% if error %}
+<ul>
+  <li>{{ error }}</li>
+</ul>
+{% endif %} {% endblock %}

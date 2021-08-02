@@ -1,0 +1,77 @@
+{% extends "layout.html" %} {% block content %}
+<div class="column is-4 is-offset-4">
+  <h3 class="title">Transaction Report</h3>
+  <div class="box">
+    <form method="POST" action="/transaction-report">
+      <div class="field">
+        <div class="control">
+          <label for="start-date">Start Date</label>
+          <input
+            class="input is-medium"
+            type="date"
+            id="start-date"
+            name="start-date"
+            required
+          />
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label for="end-date">End Date</label>
+          <input
+            class="input is-medium"
+            type="date"
+            id="end-date"
+            name="end-date"
+            required
+          />
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label for="merchant-id">Merchant Id</label>
+          <input
+            class="input is-medium"
+            type="number"
+            id="merchant-id"
+            name="merchant-id"
+            placeholder="Merchant Id"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label for="acquirer-id">Acquirer Id</label>
+          <input
+            class="input is-medium"
+            type="number"
+            id="acquirer-id"
+            name="acquirer-id"
+            placeholder="Acquirer Id"
+          />
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="button is-block is-info is-medium is-fullwidth"
+      >
+        Search
+      </button>
+    </form>
+    <br />
+    <a href="/"
+      ><button class="button is-block is-danger is-medium is-fullwidth">
+        Back
+      </button></a
+    >
+  </div>
+</div>
+{% if data %}
+<ul>
+  <li>{{ data }}</li>
+</ul>
+{% endif %} {% if error %}
+<ul>
+  <li>{{ error }}</li>
+</ul>
+{% endif %} {% endblock %}

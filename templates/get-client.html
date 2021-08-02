@@ -1,0 +1,142 @@
+{% extends "layout.html" %} {% block content %}
+<div class="column is-4 is-offset-4">
+  <h3 class="title">Get Client Details</h3>
+  <div class="box">
+    <form method="POST" action="/get-client">
+      <div class="field">
+        <div class="control">
+          <input
+            class="input is-medium"
+            type="text"
+            id="transaction-id"
+            name="transaction-id"
+            placeholder="Transaction Id"
+            autofocus=""
+            required
+          />
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="button is-block is-info is-medium is-fullwidth"
+      >
+        Search
+      </button>
+    </form>
+    <br />
+    <a href="/"
+      ><button class="button is-block is-danger is-medium is-fullwidth">
+        Back
+      </button></a
+    >
+  </div>
+</div>
+{% if data %}
+<br />
+<div class="table-container">
+  <h3 class="title">Result Table</h3>
+  <table
+    class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+  >
+    <thead>
+      <tr>
+        <th>Billing Address 1</th>
+        <th>Billing City</th>
+        <th>Billing Company</th>
+        <th>Billing Country</th>
+        <th>Billing First Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.billingAddress1 }}</td>
+        <td>{{ data.billingCity }}</td>
+        <td>{{ data.billingCompany }}</td>
+        <td>{{ data.billingCountry }}</td>
+        <td>{{ data.billingFirstName }}</td>
+      </tr>
+    </tbody>
+
+    <thead>
+      <tr>
+        <th>Billing Last Name</th>
+        <th>Billing Phone</th>
+        <th>Billing Postcode</th>
+        <th>Billing State</th>
+        <th>Billing Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.billingLastName }}</td>
+        <td>{{ data.billingPhone }}</td>
+        <td>{{ data.billingPostcode }}</td>
+        <td>{{ data.billingState }}</td>
+        <td>{{ data.billingTitle }}</td>
+      </tr>
+    </tbody>
+
+    <thead>
+      <tr>
+        <th>Birthday</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Id</th>
+        <th>Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.birthday }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.gender }}</td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.number }}</td>
+      </tr>
+    </tbody>
+
+    <thead>
+      <tr>
+        <th>Shipping Address 1</th>
+        <th>Shipping City</th>
+        <th>Shipping Company</th>
+        <th>Shipping Country</th>
+        <th>Shipping First Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.shippingAddress1 }}</td>
+        <td>{{ data.shippingCity }}</td>
+        <td>{{ data.shippingCompany }}</td>
+        <td>{{ data.shippingCountry }}</td>
+        <td>{{ data.shippingFirstName }}</td>
+      </tr>
+    </tbody>
+
+    <thead>
+      <tr>
+        <th>Shipping Last Name</th>
+        <th>Shipping Phone</th>
+        <th>Shipping Postcode</th>
+        <th>Shipping State</th>
+        <th>Shipping Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.shippingLastName }}</td>
+        <td>{{ data.shippingPhone }}</td>
+        <td>{{ data.shippingPostcode }}</td>
+        <td>{{ data.shippingState }}</td>
+        <td>{{ data.shippingTitle }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% endif %} {% if error %}
+<ul>
+  <li>{{ error }}</li>
+</ul>
+{% endif %} {% endblock %}

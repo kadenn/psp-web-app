@@ -1,0 +1,47 @@
+{% extends "layout.html" %} {% block content %} {% if session.email_address %}
+
+<div class="column is-4 is-offset-4">
+  <h3 class="title">Main Menu</h3>
+  <h2 class="subtitle">
+    With PSP Web App you​ ​can​ ​display​ ​Reporting API data and save​ ​time​ ​by​ ​automating​ ​complex​ ​reporting​ ​tasks.
+  </h2>
+  <div class="box">
+    <div>
+      <a href="/transaction-report"
+        ><button class="button is-block is-info is-large is-fullwidth">
+          Transaction Report
+        </button></a
+      >
+      <br />
+      <a href="/transaction-query"
+        ><button class="button is-block is-info is-large is-fullwidth">
+          Query Transactions
+        </button></a
+      >
+      <br />
+      <a href="/get-transaction"
+        ><button class="button is-block is-info is-large is-fullwidth">
+          Get Transaction
+        </button></a
+      >
+      <br />
+      <a href="/get-client"
+        ><button class="button is-block is-info is-large is-fullwidth">
+          Get Client
+        </button></a
+      >
+    </div>
+    <br />
+    <div>
+      You are logged in with <strong>{{ session.email_address }}</strong>
+      <br />
+      <a href="/logout"
+        ><button class="button is-danger is-white is-large is-fullwidth">
+          Logout
+        </button></a
+      >
+    </div>
+  </div>
+</div>
+
+{% else %} Please login <a href="/login">login</a>. {% endif %}{% endblock %}

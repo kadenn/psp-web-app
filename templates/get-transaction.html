@@ -1,0 +1,120 @@
+{% extends "layout.html" %} {% block content %}
+<div class="column is-4 is-offset-4">
+  <h3 class="title">Get Transaction Details</h3>
+  <div class="box">
+    <form method="POST" action="/get-transaction">
+      <div class="field">
+        <div class="control">
+          <input
+            class="input is-medium"
+            type="text"
+            id="transaction-id"
+            name="transaction-id"
+            placeholder="Transaction Id"
+            autofocus=""
+            required
+          />
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="button is-block is-info is-medium is-fullwidth"
+      >
+        Search
+      </button>
+    </form>
+    <br />
+    <a href="/"
+      ><button class="button is-block is-danger is-medium is-fullwidth">
+        Back
+      </button></a
+    >
+  </div>
+</div>
+{% if data %}
+<br />
+<div class="table-container">
+  <h3 class="title">Result Table</h3>
+  <table
+    class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+  >
+    <thead>
+      <tr>
+        <th>Customer Email</th>
+        <th>Customer Id</th>
+        <th>Customer Number</th>
+        <th>Customer First Name</th>
+        <th>Customer Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.customerInfo.email }}</td>
+        <td>{{ data.customerInfo.id }}</td>
+        <td>{{ data.customerInfo.number }}</td>
+        <td>{{ data.customerInfo.shippingFirstName }}</td>
+        <td>{{ data.customerInfo.shippingLastName }}</td>
+      </tr>
+    </tbody>
+
+    <thead>
+      <tr>
+        <th>Customer Phone</th>
+        <th>Original Amount</th>
+        <th>Original Currency</th>
+        <th>Merchant Name</th>
+        <th>Merchant Acquirer Transaction Id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.customerInfo.shippingPhone }}</td>
+        <td>{{ data.fx.merchant.originalAmount }}</td>
+        <td>{{ data.fx.merchant.originalCurrency }}</td>
+        <td>{{ data.merchant.name }}</td>
+        <td>{{ data.transaction.merchant.acquirerTransactionId }}</td>
+      </tr>
+    </tbody>
+
+    <thead>
+      <tr>
+        <th>Merchant Fx Transaction Id</th>
+        <th>Merchant Id</th>
+        <th>Merchant Merchant Id</th>
+        <th>Merchant Message</th>
+        <th>Merchant Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.transaction.merchant.fxTransactionId }}</td>
+        <td>{{ data.transaction.merchant.id }}</td>
+        <td>{{ data.transaction.merchant.merchantId }}</td>
+        <td>{{ data.transaction.merchant.message }}</td>
+        <td>{{ data.transaction.merchant.operation }}</td>
+      </tr>
+    </tbody>
+
+    <thead>
+      <tr>
+        <th>Merchant Reference No</th>
+        <th>Merchant Status</th>
+        <th>Merchant Transaction Id</th>
+        <th>Merchant Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.transaction.merchant.referenceNo }}</td>
+        <td>{{ data.transaction.merchant.status }}</td>
+        <td>{{ data.transaction.merchant.transactionId }}</td>
+        <td>{{ data.transaction.merchant.type }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endif %} {% if error %}
+<ul>
+  <li>{{ error }}</li>
+</ul>
+{% endif %} {% endblock %}

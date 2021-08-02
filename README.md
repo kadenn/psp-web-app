@@ -2,7 +2,7 @@
 
 A simple web application that consumes the PSP Reporting API
 
-Heroku: https://psp-web-app.herokuapp.com/login
+Heroku: https://psp-web-app.herokuapp.com/
 
 # Important Notes
 

@@ -31,8 +31,12 @@ def login():
         # initialize token
         get_access_token(email_address, request.form.get("password"))
 
-        # redirect to the main page
-        return redirect("/")
+        if session["token"] is None:
+            return render_template("login.html", error='You have entered an invalid email or password')
+        else:
+            # redirect to the main page
+            return redirect("/")
+
     return render_template("login.html")
 
 
@@ -46,7 +50,7 @@ def logout():
 @app.route("/transaction-query", methods=["POST", "GET"])
 def transaction_query():
     if request.method == "POST":
-        # print('Making transaction query...')
+        print('Making transaction query...')
 
         fromDate = request.form.get("start-date")
         toDate = request.form.get("end-date")
@@ -83,7 +87,6 @@ def transaction_query():
             return render_template("transaction-query.html", error='An error occurred while making the transaction query.')
 
         session["current_page"] = transactions.get('current_page')
-        print('current_page:', transactions.get('current_page'))
 
         return render_template("transaction-query.html", data=transactions.get('data'), next_page=transactions.get('next_page_url'), prev_page=transactions.get('prev_page_url'))
     session["current_page"] = 1
@@ -94,7 +97,7 @@ def transaction_query():
 @app.route("/transaction-report", methods=["POST", "GET"])
 def transaction_report():
     if request.method == "POST":
-        # print('Getting transaction report...')
+        print('Getting transaction report...')
 
         fromDate = request.form.get("start-date")
         toDate = request.form.get("end-date")
@@ -124,7 +127,7 @@ def transaction_report():
 @app.route("/get-client", methods=["POST", "GET"])
 def get_client():
     if request.method == "POST":
-        # print('Getting client details...')
+        print('Getting client details...')
 
         transactionId = request.form.get("transaction-id")
         parameters = {'transactionId': transactionId}
@@ -145,7 +148,7 @@ def get_client():
 @app.route("/get-transaction", methods=["POST", "GET"])
 def get_transaction():
     if request.method == "POST":
-        # print('Getting transaction details...')
+        print('Getting transaction details...')
 
         transactionId = request.form.get("transaction-id")
         parameters = {'transactionId': transactionId}
@@ -164,7 +167,7 @@ def get_transaction():
 
 
 def get_access_token(email, password):
-    # print('Getting new access token...')
+    print('Getting new access token...')
 
     try:
         response = requests.post(base_url + '/merchant/user/login',
@@ -184,7 +187,7 @@ def get_access_token(email, password):
 
 
 def send_post_request(path, parameters):
-    # print('Sending post request...')
+    print('Sending post request...')
     response_message = ""
 
     try:
@@ -194,7 +197,6 @@ def send_post_request(path, parameters):
                                  data=cleaned_parameters, headers={'Authorization': session.get("token")})
 
         responseJSON = response.json()
-        print("responseJSON=>>", responseJSON)
         response_message = responseJSON.get('message')
 
         # if the response was successful, no Exception will be raised
@@ -211,3 +213,7 @@ def send_post_request(path, parameters):
     except Exception as err:
         print(
             f'An error occurred: {err}')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

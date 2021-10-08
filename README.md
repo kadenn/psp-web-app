@@ -2,8 +2,6 @@
 
 A simple web application that consumes the PSP Reporting API
 
-Heroku: https://psp-web-app.herokuapp.com/
-
 # Important Notes
 
 - I didn't use logger because heroku can see logs from Python's sys.stdout
